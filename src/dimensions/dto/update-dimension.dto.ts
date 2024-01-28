@@ -1,5 +1,5 @@
 import { PartialType } from '@nestjs/swagger';
-import { IsString, IsOptional, IsBoolean, IsNotEmpty } from 'class-validator';
+import { IsString, IsOptional, IsArray, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { CreateDimensionDto } from './create-dimension.dto';
 
@@ -28,11 +28,11 @@ export class UpdateDimensionDto extends PartialType(CreateDimensionDto) {
     description?: string;
     
     @ApiProperty({
-        example: true,
+        example: ['First feature', 'Second Feature'],
         description: 'The Features of the Dimension',
         required: false,
     })
-    @IsBoolean()
+    @IsArray()
     @IsOptional()
     features: [string];
     @ApiProperty({

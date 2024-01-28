@@ -1,5 +1,6 @@
-import { IsString, IsOptional, IsBoolean, IsNotEmpty } from 'class-validator';
+import { IsString, IsOptional, IsArray, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { isArray } from 'util';
 enum DangerLevelEnum {
     LOW = 'Low',
     MEDIUM = 'Medium',
@@ -26,11 +27,12 @@ export class CreateDimensionDto {
     description?: string;
     
     @ApiProperty({
-        example: true,
+        example: ['First feature', 'Second Feature'],
         description: 'The Features of the Dimension',
         required: false,
     })
-    @IsBoolean()
+    @IsArray()
+    @IsString({ each: true })
     @IsOptional()
     features: [string];
     @ApiProperty({
